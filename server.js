@@ -4,6 +4,7 @@ import cors from 'cors';
 import bodyParser from 'body-parser';
 import dotenv from 'dotenv';
 import userRoutes from './routes/user.routes.js';
+import productRoutes from './routes/product.routes.js';
 
 dotenv.config();
 
@@ -22,6 +23,8 @@ mongoose.connect(process.env.MONGO_URI, {
 
 // User routes
 app.use('/api/users', userRoutes);
+// product routes
+app.use('/api/products', productRoutes);
 
 app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}`);
