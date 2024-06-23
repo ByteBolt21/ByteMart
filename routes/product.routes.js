@@ -4,10 +4,10 @@ import auth from '../middlewares/auth.js';
 
 const router = express.Router();
 
-router.post('/', auth, createProduct);
-router.get('/', getProducts);
-router.get('/:id', getProductById);
-router.put('/:id', auth, updateProduct);
-router.delete('/:id', auth, deleteProduct);
+router.post('/', auth(['seller']), createProduct);
+router.get('/', auth(), getProducts);
+router.get('/:id',auth(), getProductById);
+router.put('/:id', auth(['seller']), updateProduct);
+router.delete('/:id', auth(['seller']), deleteProduct);
 
 export default router;
