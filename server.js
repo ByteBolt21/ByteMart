@@ -5,6 +5,7 @@ import bodyParser from 'body-parser';
 import dotenv from 'dotenv';
 import userRoutes from './routes/user.routes.js';
 import productRoutes from './routes/product.routes.js';
+import orderRoutes from './routes/order.routes.js';
 
 dotenv.config();
 
@@ -25,6 +26,8 @@ mongoose.connect(process.env.MONGO_URI, {
 app.use('/api/users', userRoutes);
 // product routes
 app.use('/api/products', productRoutes);
+// Order routes
+app.use('/api/orders', orderRoutes);
 
 app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}`);
