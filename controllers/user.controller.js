@@ -2,6 +2,7 @@ import User from '../models/user.model.js';
 import bcrypt from 'bcryptjs';
 import jwt from 'jsonwebtoken';
 import { ValidationError } from '../utils/errors.js';
+import { isValidObjectId } from 'mongoose';
 
 export const signup = async (req, res, next) => {
   const { fullName, username, email, role, number, password } = req.body;
@@ -52,6 +53,9 @@ export const signin = async (req, res, next) => {
 
 export const getUserById = async (req, res, next) => {
   const { userId } = req.params;
+  if (!isValidObjectId(userId)) {
+    return next(new ValidationError('Invalid user ID'));
+  }
   try {
     const user = await User.findById(userId).select('-password');
     if (!user) {
@@ -65,6 +69,9 @@ export const getUserById = async (req, res, next) => {
 
 export const updateUser = async (req, res, next) => {
   const { userId } = req.params;
+  if (!isValidObjectId(userId)) {
+    return next(new ValidationError('Invalid user ID'));
+  }
   const { fullName, username, email, number, role, isVerified } = req.body;
 
   try {
@@ -95,6 +102,9 @@ export const getAllUsers = async (req, res, next) => {
 
 export const deleteUser = async (req, res, next) => {
   const { userId } = req.params;
+  if (!isValidObjectId(userId)) {
+    return next(new ValidationError('Invalid user ID'));
+  }
   try {
     const user = await User.findByIdAndDelete(userId);
     if (!user) {

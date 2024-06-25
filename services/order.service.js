@@ -1,5 +1,6 @@
 import Order from '../models/order.model.js';
 import Product from '../models/product.model.js';
+import { ValidationError, OrderCreationError, ProductNotFoundError, VariantNotFoundError, OrderNotFoundError } from '../utils/errors.js';
 
 export const createOrderService = async (buyerId, orderData) => {
   const { products, shippingAddress, billingAddress } = orderData;
@@ -12,7 +13,7 @@ export const createOrderService = async (buyerId, orderData) => {
     for (const item of products) {
       const product = await Product.findById(item.product);
       if (!product) {
-        throw new Error(`Product with ID ${item.product} not found`);
+        throw new ProductNotFoundError(`Product with ID ${item.product} not found`);
       }
 
       // Find the specific variation for the product based on color and size
@@ -21,7 +22,7 @@ export const createOrderService = async (buyerId, orderData) => {
       );
 
       if (!variation) {
-        throw new Error(`Variant not found for product ${item.product} with color ${item.variation.color} and size ${item.variation.size}`);
+        throw new VariantNotFoundError(`Variant not found for product ${item.product} with color ${item.variation.color} and size ${item.variation.size}`);
       }
 
       // Calculate the subtotal for this particular item
@@ -51,7 +52,11 @@ export const createOrderService = async (buyerId, orderData) => {
 
     return order;
   } catch (error) {
-    throw new Error(error.message);
+    if (error instanceof ValidationError || error instanceof ProductNotFoundError || error instanceof VariantNotFoundError) {
+      throw error; // Pass custom errors directly
+    } else {
+      throw new OrderCreationError('Failed to create order'); // Throw custom error for order creation failure
+    }
   }
 };
 
@@ -69,9 +74,16 @@ export const getOrdersByBuyerIdService = async (buyerId) => {
 export const getOrderByIdService = async (orderId) => {
   try {
     const order = await Order.findById(orderId).populate('products.product');
+    if (!order) {
+      throw new OrderNotFoundError(`Order with ID ${orderId} not found`);
+    }
     return order;
   } catch (error) {
-    throw new Error(error.message);
+    if (error instanceof OrderNotFoundError) {
+      throw error; // Pass custom error directly
+    } else {
+      throw new Error(error.message);
+    }
   }
 };
 
@@ -83,19 +95,33 @@ export const updateOrderStatusService = async (orderId, status, trackingId) => {
       { status, trackingId },
       { new: true }
     );
+    if (!order) {
+      throw new OrderNotFoundError(`Order with ID ${orderId} not found`);
+    }
     return order;
   } catch (error) {
-    throw new Error(error.message);
+    if (error instanceof OrderNotFoundError) {
+      throw error; // Pass custom error directly
+    } else {
+      throw new Error(error.message);
+    }
   }
 };
 
 
-
+// Function to delete an order by ID
 export const deleteOrderByIdService = async (orderId) => {
   try {
     const order = await Order.findByIdAndDelete(orderId);
+    if (!order) {
+      throw new OrderNotFoundError('Order not found');
+    }
     return order;
   } catch (error) {
-    throw new Error(error.message);
+    if (error instanceof OrderNotFoundError) {
+      throw error;
+    } else {
+      throw new Error(error.message);
+    }
   }
 };

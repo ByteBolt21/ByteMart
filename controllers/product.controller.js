@@ -1,6 +1,7 @@
 //Why we dont use next() middleware to handle errors? 
 // User Controller: You might use next() to handle errors like database connectivity issues or unexpected errors that should be managed globally.
 // Product Controller: If errors are more specific to validation (like missing required fields) or business logic errors (like product not found), handling them directly with res methods in the controller can be appropriate.
+import { isValidObjectId } from 'mongoose';
 import {
   createProductService,
   getProductsService,
@@ -47,6 +48,9 @@ export const getProducts = async (req, res) => {
 // Controller function to get a product by ID
 export const getProductById = async (req, res) => {
   const { id } = req.params;
+  if (!isValidObjectId(id)) {
+    return next(new ValidationError('Invalid product ID format'));
+  }
   try {
     const product = await getProductByIdService(id);
     if (!product) return res.status(404).json({ error: 'Product not found' });
@@ -59,6 +63,9 @@ export const getProductById = async (req, res) => {
 // Controller function to update a product by ID
 export const updateProduct = async (req, res) => {
   const { id } = req.params;
+  if (!isValidObjectId(id)) {
+    return next(new ValidationError('Invalid product ID format'));
+  }
   const updateData = req.body;
   try {
     const product = await updateProductService(id, updateData);
@@ -72,6 +79,9 @@ export const updateProduct = async (req, res) => {
 // Controller function to delete a product by ID
 export const deleteProduct = async (req, res) => {
   const { id } = req.params;
+  if (!isValidObjectId(id)) {
+    return next(new ValidationError('Invalid product ID format'));
+  }
   try {
     const product = await deleteProductService(id);
     if (!product) return res.status(404).json({ error: 'Product not found' });
