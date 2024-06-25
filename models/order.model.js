@@ -7,6 +7,11 @@ const OrderSchema = new Schema({
   products: [
     {
       product: { type: mongoose.Schema.Types.ObjectId, ref: 'Product', required: true },
+      variation: { 
+        color: { type: String },
+        size: { type: String },
+        price: { type: Number, required: true }
+      },
       quantity: { type: Number, required: true }
     }
   ],

@@ -2,7 +2,7 @@ import Product from '../models/product.model.js';
 
 // Function to create a new product
 export const createProductService = async (productData, userId) => {
-  const { name, description, category, subcategory, brand, price, stock } = productData;
+  const { name, description, category, subcategory, brand, stock, images, variations } = productData;
   try {
     const product = await Product.create({
       name,
@@ -10,9 +10,10 @@ export const createProductService = async (productData, userId) => {
       subcategory,
       description,
       brand,
-      price,
       stock,
-      seller: userId  // Assuming req.user.id is passed as userId
+      images,
+      seller: userId,
+      variations
     });
     return product;
   } catch (error) {
