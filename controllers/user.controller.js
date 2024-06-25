@@ -6,6 +6,10 @@ import { ValidationError } from '../utils/errors.js';
 export const signup = async (req, res, next) => {
   const { fullName, username, email, role, number, password } = req.body;
   try {
+    if (!fullName || !username || !email || !role || !number || !password) {
+      throw new ValidationError('All fields are required');
+    }
+    
     const existingUser = await User.findOne({ $or: [{ username }, { email }] });
     if (existingUser) {
       throw new ValidationError('Username or email already exists');

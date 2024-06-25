@@ -1,23 +1,35 @@
-import Product from '../models/product.model.js';
+// services/product.service.js
 
-// Function to create a new product
-export const createProductService = async (productData, userId) => {
-  const { name, description, category, subcategory, brand, stock, images, variations } = productData;
+import Product from '../models/product.model.js';
+import { ValidationError, ProductCreationError } from '../utils/errors.js';
+
+// Function to create a product
+export const createProductService = async ({ name, category, description, subcategory, brand, stock, images, variations }, userId) => {
   try {
+    // Validate required fields
+    if (!name || !category || !description || !subcategory || !brand || !stock || !images || !variations) {
+      throw new ValidationError('All fields are required');
+    }
+
     const product = await Product.create({
       name,
       category,
-      subcategory,
       description,
+      subcategory,
       brand,
       stock,
       images,
+      variations,
       seller: userId,
-      variations
     });
+
     return product;
   } catch (error) {
-    throw new Error(error.message);
+    if (error instanceof ValidationError) {
+      throw error; // Pass custom validation errors directly
+    } else {
+      throw new ProductCreationError('Failed to create product'); // Throw custom error for product creation failure
+    }
   }
 };
 

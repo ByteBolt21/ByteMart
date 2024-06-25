@@ -1,3 +1,6 @@
+//Why we dont use next() middleware to handle errors? 
+// User Controller: You might use next() to handle errors like database connectivity issues or unexpected errors that should be managed globally.
+// Product Controller: If errors are more specific to validation (like missing required fields) or business logic errors (like product not found), handling them directly with res methods in the controller can be appropriate.
 import {
   createProductService,
   getProductsService,
@@ -6,14 +9,28 @@ import {
   deleteProductService
 } from '../services/product.service.js';
 
+import { ValidationError, ProductCreationError } from '../utils/errors.js';
+
 // Controller function to create a product
 export const createProduct = async (req, res) => {
   const { name, category, description, subcategory, brand, stock, images, variations } = req.body;
+
   try {
+    // Validate request data
+    if (!name || !category || !description || !subcategory || !brand || !stock || !images || !variations) {
+      throw new ValidationError('All fields are required');
+    }
+
     const product = await createProductService({ name, category, description, subcategory, brand, stock, images, variations }, req.user.id);
     res.status(201).json({ message: 'Product created successfully', product });
   } catch (error) {
-    res.status(500).json({ error: error.message });
+    if (error instanceof ValidationError) {
+      res.status(400).json({ error: error.message }); // Bad request due to validation error
+    } else if (error instanceof ProductCreationError) {
+      res.status(500).json({ error: error.message }); // Server error for product creation failure
+    } else {
+      res.status(500).json({ error: 'Failed to create product' }); // Generic server error
+    }
   }
 };
 

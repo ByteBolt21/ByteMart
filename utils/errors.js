@@ -19,9 +19,17 @@ class AppError extends Error {
     }
   }
   
-  export {
-    AppError,
-    NotFoundError,
-    ValidationError
-  };
+
   
+class ProductCreationError extends AppError {
+  constructor(message) {
+    super(message, 500);
+  }
+}
+
+export {
+  AppError,
+  NotFoundError,
+  ValidationError,
+  ProductCreationError
+};
