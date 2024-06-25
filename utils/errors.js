@@ -60,6 +60,13 @@ class OrderNotFoundError extends Error {
   }
 }
 
+class CartOperationError extends Error {
+  constructor(message) {
+    super(message);
+    this.name = 'CartOperationError';
+  }
+}
+
 export {
   AppError,
   NotFoundError,
@@ -68,5 +75,6 @@ export {
   OrderNotFoundError,
   VariantNotFoundError,
   ProductNotFoundError,
-  OrderCreationError
+  OrderCreationError,
+  CartOperationError
 };
