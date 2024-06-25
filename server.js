@@ -6,6 +6,7 @@ import dotenv from 'dotenv';
 import userRoutes from './routes/user.routes.js';
 import productRoutes from './routes/product.routes.js';
 import orderRoutes from './routes/order.routes.js';
+import errorHandlerMiddleware from './middlewares/error-handler.middleware.js';
 
 dotenv.config();
 
@@ -28,6 +29,10 @@ app.use('/api/users', userRoutes);
 app.use('/api/products', productRoutes);
 // Order routes
 app.use('/api/orders', orderRoutes);
+
+//  It's typically defined as the last middleware in the middleware chain so that it catches any errors thrown or passed to next() from previous middleware or route handlers.
+// Error handling middleware
+app.use(errorHandlerMiddleware);
 
 app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}`);
