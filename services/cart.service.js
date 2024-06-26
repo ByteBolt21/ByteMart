@@ -5,18 +5,27 @@ import { ValidationError, NotFoundError, CartOperationError } from '../utils/err
 // Add to Cart Service
 export const addToCartService = async (userId, { productId, quantity, variation }) => {
   try {
+    // console.log('Product ID:', productId);
+    // console.log('Quantity:', quantity);
+    // console.log('Variation:', variation); 
     const product = await Product.findById(productId);
     if (!product) throw new NotFoundError(`Product with ID ${productId} not found`);
 
     const productVariation = product.variations.find(v =>
-      v.color === variation.color && v.size === variation.size
+      v.color === variation.color && v.size === variation.size && v.stock === variation.stock
     );
+    // console.log("productVariation=========",productVariation);
     if (!productVariation) throw new NotFoundError(`Variation not found for product with color ${variation.color} and size ${variation.size}`);
+    // console.log("productVariation.stock=========",productVariation.stock);
 
     let cart = await Cart.findOne({ user: userId });
+    // console.log("cartFound====" , cart)
     if (!cart) {
       cart = new Cart({ user: userId, items: [] });
     }
+    
+    // console.log("cartMade====" , cart)
+    // console.log("cart.items====" , cart.items)
 
     const cartItem = cart.items.find(item => item.product.toString() === productId && item.variation.color === variation.color && item.variation.size === variation.size);
     if (cartItem) {
@@ -27,7 +36,8 @@ export const addToCartService = async (userId, { productId, quantity, variation 
         variation: {
           color: variation.color,
           size: variation.size,
-          price: productVariation.price
+          price: productVariation.price,
+          stock: productVariation.stock // Ensure stock is included
         },
         quantity
       });

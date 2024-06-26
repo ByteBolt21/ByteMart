@@ -1,4 +1,3 @@
-// controllers/order.controller.js
 import {
   createOrderService,
   getOrdersByBuyerIdService,
@@ -9,7 +8,6 @@ import {
 import { ValidationError } from '../utils/errors.js';
 import { isValidObjectId } from '../utils/validateObjectId.js';
 
-// Controller function to create a new order
 export const createOrder = async (req, res, next) => {
   const { products, shippingAddress, billingAddress } = req.body;
   try {
@@ -20,7 +18,6 @@ export const createOrder = async (req, res, next) => {
   }
 };
 
-// Controller function to get orders for a specific buyer
 export const getOrders = async (req, res, next) => {
   try {
     const orders = await getOrdersByBuyerIdService(req.user.id);
@@ -30,7 +27,6 @@ export const getOrders = async (req, res, next) => {
   }
 };
 
-// Controller function to get an order by ID
 export const getOrderById = async (req, res, next) => {
   const { id } = req.params;
   if (!isValidObjectId(id)) {
@@ -44,7 +40,6 @@ export const getOrderById = async (req, res, next) => {
   }
 };
 
-// Controller function to update order status and tracking information
 export const updateOrderStatus = async (req, res, next) => {
   const { id } = req.params;
   if (!isValidObjectId(id)) {
@@ -56,10 +51,9 @@ export const updateOrderStatus = async (req, res, next) => {
     res.json(order);
   } catch (error) {
     next(error);
-  } 
+  }
 };
 
-// Controller function to delete an order by ID
 export const deleteOrder = async (req, res, next) => {
   const { id } = req.params;
   if (!isValidObjectId(id)) {

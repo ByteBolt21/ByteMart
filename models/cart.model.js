@@ -7,7 +7,8 @@ const CartItemSchema = new Schema({
   variation: {
     color: { type: String, required: true },
     size: { type: String, required: true },
-    price: { type: Number, required: true }
+    price: { type: Number, required: true },
+    stock: { type: Number, required: true } // Added stock to manage stock updates
   },
   quantity: { type: Number, required: true, min: 1 }
 });
