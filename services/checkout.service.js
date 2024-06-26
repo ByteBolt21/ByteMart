@@ -3,7 +3,8 @@ import Cart from '../models/cart.model.js';
 import Product from '../models/product.model.js';
 import Order from '../models/order.model.js';
 import { NotFoundError, ValidationError, CartOperationError } from '../utils/errors.js';
-import paymentGateway from '../utils/stripe/paymentGateway.js'; // Updated path for Stripe integration
+import stripePaymentGateway from '../utils/stripe/stripeGateway.js'; 
+import paypalPaymentGateway from '../utils/paypal/paypalGateway.js'; 
 
 export const verifyCartContents = async (userId) => {
   const cart = await Cart.findOne({ user: userId }).populate('items.product');
@@ -39,9 +40,9 @@ export const createOrder = async (userId, cart, totalAmount, shippingAddress, bi
   await order.save();
   return order;
 };
-
+//for stripe 
 export const processPayment = async (order, paymentDetails) => {
-  const paymentResult = await paymentGateway.processPayment(order.totalAmount, paymentDetails);
+  const paymentResult = await stripePaymentGateway.processPaymentThroughStripe(order.totalAmount, paymentDetails);
   if (paymentResult.error) {
     throw new CartOperationError('Payment failed');
   }
@@ -56,6 +57,30 @@ export const processPayment = async (order, paymentDetails) => {
   
   return paymentResult;
 };
+
+// for Paypal -> first create order and then capture it
+// export const processPayment = async (order, paymentDetails) => {
+//   const paymentResult = await paypalPaymentGateway.createPayPalOrder(order.totalAmount, paymentDetails);
+//   if (paymentResult.error) {
+//     throw new CartOperationError('Payment failed');
+//   }
+  
+//   // Capture the payment
+//   const captureResult = await paypalPaymentGateway.capturePayPalPayment(paymentResult.id);
+//   if (captureResult.error) {
+//     throw new CartOperationError('Payment capture failed');
+//   }
+
+//   // Attach payment details to the order if needed
+//   order.payment = {
+//     method: 'PayPal',
+//     transactionId: captureResult.id
+//   };
+
+//   await order.save();
+  
+//   return captureResult;
+// };
 
 export const updateStock = async (cart) => {
   for (const item of cart.items) {

@@ -1,10 +1,12 @@
 // paymentGateway.js
 
+import dotenv from 'dotenv';
+dotenv.config();
 import Stripe from 'stripe';
 
-const stripe = new Stripe('sk_test_51PVojF07bbRBZ1HHqAbKCxUMmCvl8bG74L3zm6OzA4CplVy6qDqfNRxUttOjUxYHFmtYfbIAP7kZIosKKftv23wp009Wl8096G');
+const stripe = new Stripe(process.env.STRIPE_SECRETE_KEY);
 
-const processPayment = async (amount, paymentDetails) => {
+const processPaymentThroughStripe = async (amount, paymentDetails) => {
   try {
     console.log("paymentDetails- in paymentProcess========= " , paymentDetails)
     console.log("amount- in paymentProcess========= " , amount)
@@ -25,7 +27,7 @@ const processPayment = async (amount, paymentDetails) => {
   }
 };
 
-export default { processPayment };
+export default { processPaymentThroughStripe };
 
 
 
