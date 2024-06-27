@@ -11,16 +11,16 @@ export const signup = async (req, res, next) => {
     if (!fullName || !username || !email || !role || !number || !password) {
       throw new ValidationError('All fields are required');
     }
-    
+
     const existingUser = await User.findOne({ $or: [{ username }, { email }] });
     if (existingUser) {
       throw new ValidationError('Username or email already exists');
     }
 
     const user = new User({ fullName, username, email, role, number, password });
-    await user.save();
+    const saveUser = await user.save();
     logger.info(`User registered successfully: ${username}`);
-    res.status(201).json({ message: 'User registered successfully' });
+    res.status(201).json({ message: 'User registered successfully', saveUser });
   } catch (error) {
     logger.error(`Signup error: ${error.message}`);
     if (error instanceof ValidationError) {
