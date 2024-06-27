@@ -1,6 +1,7 @@
 import Order from '../models/order.model.js';
 import Product from '../models/product.model.js';
 import { ValidationError, OrderCreationError, ProductNotFoundError, VariantNotFoundError, OrderNotFoundError } from '../utils/errors.js';
+import logger from '../utils/logger.js';
 
 export const createOrderService = async (userId, orderData) => {
   const { products, shippingAddress, billingAddress } = orderData;
@@ -49,11 +50,14 @@ export const createOrderService = async (userId, orderData) => {
       billingAddress
     });
 
+    logger.info(`Order created successfully: Order ID ${order._id}, User ID ${userId}`);
     return order;
   } catch (error) {
     if (error instanceof ValidationError || error instanceof ProductNotFoundError || error instanceof VariantNotFoundError) {
+      logger.error(`Failed to create order: ${error.message}`);
       throw error;
     } else {
+      logger.error(`Failed to create order: ${error.message}`);
       throw new OrderCreationError('Failed to create order');
     }
   }
@@ -62,8 +66,10 @@ export const createOrderService = async (userId, orderData) => {
 export const getOrdersByBuyerIdService = async (userId) => {
   try {
     const orders = await Order.find({ user: userId }).populate('items.product');
+    logger.info(`Fetched orders successfully for user ${userId}`);
     return orders;
   } catch (error) {
+    logger.error(`Failed to fetch orders: ${error.message}`);
     throw new Error(error.message);
   }
 };
@@ -72,13 +78,17 @@ export const getOrderByIdService = async (orderId) => {
   try {
     const order = await Order.findById(orderId).populate('items.product');
     if (!order) {
+      logger.warn(`Order not found with ID ${orderId}`);
       throw new OrderNotFoundError(`Order with ID ${orderId} not found`);
     }
-    return order;
+    logger.info(`Fetched order successfully: Order ID ${orderId}`);
+     return order;
   } catch (error) {
     if (error instanceof OrderNotFoundError) {
+      logger.warn(`Order not found with ID ${orderId}`);
       throw error;
     } else {
+      logger.error(`Failed to fetch order: ${error.message}`);
       throw new Error(error.message);
     }
   }
@@ -92,13 +102,17 @@ export const updateOrderStatusService = async (orderId, status, trackingId) => {
       { new: true }
     );
     if (!order) {
+      logger.warn(`Order not found with ID ${orderId}`);
       throw new OrderNotFoundError(`Order with ID ${orderId} not found`);
     }
+    logger.info(`Updated order status successfully: Order ID ${orderId}, Status ${status}`);
     return order;
   } catch (error) {
     if (error instanceof OrderNotFoundError) {
+      logger.warn(`Order not found with ID ${orderId}`);
       throw error;
     } else {
+      logger.error(`Failed to update order status: ${error.message}`);
       throw new Error(error.message);
     }
   }
@@ -108,13 +122,17 @@ export const deleteOrderByIdService = async (orderId) => {
   try {
     const order = await Order.findByIdAndDelete(orderId);
     if (!order) {
+      logger.warn(`Order not found with ID ${orderId}`);
       throw new OrderNotFoundError('Order not found');
     }
+    logger.info(`Deleted order successfully: Order ID ${orderId}`);
     return order;
   } catch (error) {
     if (error instanceof OrderNotFoundError) {
+      logger.warn(`Order not found with ID ${orderId}`);
       throw error;
     } else {
+      logger.error(`Failed to delete order: ${error.message}`);
       throw new Error(error.message);
     }
   }

@@ -1,0 +1,18 @@
+2024-06-27T06:18:17.737Z [[32minfo[39m]: User signed in successfully: johndoeSeller
+2024-06-27T06:18:26.900Z [[32minfo[39m]: User signed in successfully: johndoeSeller
+2024-06-27T06:18:31.086Z [[31merror[39m]: Signup error: All fields are required
+2024-06-27T06:18:42.592Z [[31merror[39m]: Signup error: All fields are required
+2024-06-27T06:20:12.617Z [[32minfo[39m]: User registered successfully: johndoeSeller3
+2024-06-27T07:01:23.908Z [[32minfo[39m]: User signed in successfully: johndoeSeller
+2024-06-27T07:01:50.368Z [[32minfo[39m]: Product created: Sample Product 34
+2024-06-27T07:01:50.369Z [[32minfo[39m]: Product created successfully: Sample Product 34
+2024-06-27T07:02:18.026Z [[32minfo[39m]: Fetched all products
+2024-06-27T07:02:18.027Z [[32minfo[39m]: All products fetched successfully
+2024-06-27T07:02:37.366Z [[32minfo[39m]: Added product to cart: 667b9f8afd3931fce4646082, Quantity: 2, User: 667a47c87e7b351ec5fc3446
+2024-06-27T07:02:37.367Z [[32minfo[39m]: Item added to cart: Product ID 667b9f8afd3931fce4646082, Quantity 2, User ID 667a47c87e7b351ec5fc3446
+2024-06-27T07:02:54.803Z [[32minfo[39m]: Checkout initiated for user ID 667a47c87e7b351ec5fc3446
+2024-06-27T07:02:55.021Z [[32minfo[39m]: Order created successfully for user ID 667a47c87e7b351ec5fc3446: Order ID 667d0e9e714d7f7c32ac6e4b
+2024-06-27T07:02:55.022Z [[32minfo[39m]: Order created successfully for user ID 667a47c87e7b351ec5fc3446: Order ID 667d0e9e714d7f7c32ac6e4b
+2024-06-27T07:02:58.351Z [[32minfo[39m]: Payment processed successfully for PayPal: Order ID 667d0e9e714d7f7c32ac6e4b
+2024-06-27T07:02:58.811Z [[32minfo[39m]: Order confirmation sent for order: Order ID 667d0e9e714d7f7c32ac6e4b
+2024-06-27T07:02:58.813Z [[32minfo[39m]: Confirmation sent for order: Order ID 667d0e9e714d7f7c32ac6e4b

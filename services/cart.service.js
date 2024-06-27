@@ -1,6 +1,7 @@
 import Cart from '../models/cart.model.js';
 import Product from '../models/product.model.js';
 import { ValidationError, NotFoundError, CartOperationError } from '../utils/errors.js';
+import logger from '../utils/logger.js';
 
 // Add to Cart Service
 export const addToCartService = async (userId, { productId, quantity, variation }) => {
@@ -44,8 +45,10 @@ export const addToCartService = async (userId, { productId, quantity, variation 
     }
 
     await cart.save();
+    logger.info(`Added product to cart: ${productId}, Quantity: ${quantity}, User: ${userId}`);
     return cart;
   } catch (error) {
+    logger.error(`Add to cart service error: ${error.message}`);
     throw new CartOperationError(error.message);
   }
 };
@@ -55,8 +58,10 @@ export const getCartService = async (userId) => {
   try {
     const cart = await Cart.findOne({ user: userId }).populate('items.product');
     if (!cart) throw new NotFoundError('Cart not found');
+    logger.info(`Fetched cart for user: ${userId}`);
     return cart;
   } catch (error) {
+    logger.error(`Get cart service error: ${error.message}`);
     throw new CartOperationError(error.message);
   }
 };
@@ -72,8 +77,10 @@ export const updateCartService = async (userId, { productId, quantity, variation
 
     cartItem.quantity = quantity;
     await cart.save();
+    logger.info(`Updated cart for user: ${userId}, Product: ${productId}, Quantity: ${quantity}`);
     return cart;
   } catch (error) {
+    logger.error(`Update cart service error: ${error.message}`);
     throw new CartOperationError(error.message);
   }
 };
@@ -86,8 +93,10 @@ export const removeFromCartService = async (userId, productId, variation) => {
 
     cart.items = cart.items.filter(item => !(item.product.toString() === productId && item.variation.color === variation.color && item.variation.size === variation.size));
     await cart.save();
+    logger.info(`Removed product from cart: ${productId}, User: ${userId}`);
     return cart;
   } catch (error) {
-    throw new CartOperationError(error.message);
+    logger.error(`Remove from cart service error: ${error.message}`);
+     throw new CartOperationError(error.message);
   }
 };

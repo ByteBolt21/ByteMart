@@ -3,6 +3,7 @@ import bcrypt from 'bcryptjs';
 import jwt from 'jsonwebtoken';
 import { ValidationError } from '../utils/errors.js';
 import { isValidObjectId } from 'mongoose';
+import logger from '../utils/logger.js';
 
 export const signup = async (req, res, next) => {
   const { fullName, username, email, role, number, password } = req.body;
@@ -18,8 +19,10 @@ export const signup = async (req, res, next) => {
 
     const user = new User({ fullName, username, email, role, number, password });
     await user.save();
+    logger.info(`User registered successfully: ${username}`);
     res.status(201).json({ message: 'User registered successfully' });
   } catch (error) {
+    logger.error(`Signup error: ${error.message}`);
     if (error instanceof ValidationError) {
       return next(error);
     }
@@ -42,8 +45,10 @@ export const signin = async (req, res, next) => {
     }
 
     const token = jwt.sign({ id: user._id, role: user.role }, process.env.JWT_SECRET, { expiresIn: '1h' });
+    logger.info(`User signed in successfully: ${user.username}`);
     res.json({ token });
   } catch (error) {
+    logger.error(`Signin error: ${error.message}`);
     if (error instanceof ValidationError) {
       return res.status(400).json({ error: error.message });
     }
@@ -61,8 +66,10 @@ export const getUserById = async (req, res, next) => {
     if (!user) {
       throw new ValidationError('User not found');
     }
+    logger.info(`User fetched successfully: ${user.username}`);
     res.json(user);
   } catch (error) {
+    logger.error(`Get user by ID error: ${error.message}`);
     next(error);
   }
 };
@@ -85,8 +92,10 @@ export const updateUser = async (req, res, next) => {
       throw new ValidationError('User not found');
     }
 
+    logger.info(`User updated successfully: ${updatedUser.username}`);
     res.json(updatedUser);
   } catch (error) {
+    logger.error(`Update user error: ${error.message}`);
     next(error);
   }
 };
@@ -94,8 +103,10 @@ export const updateUser = async (req, res, next) => {
 export const getAllUsers = async (req, res, next) => {
   try {
     const users = await User.find().select('-password');
+    logger.info('All users fetched successfully');
     res.json(users);
   } catch (error) {
+    logger.error(`Get all users error: ${error.message}`);
     next(error);
   }
 };
@@ -110,8 +121,10 @@ export const deleteUser = async (req, res, next) => {
     if (!user) {
       throw new ValidationError('User not found');
     }
+    logger.info(`User deleted successfully: ${user.username}`);
     res.json({ message: 'User deleted successfully' });
   } catch (error) {
+    logger.error(`Delete user error: ${error.message}`);
     next(error);
   }
 };

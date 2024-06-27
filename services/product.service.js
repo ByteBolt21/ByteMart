@@ -1,5 +1,6 @@
 import Product from '../models/product.model.js';
 import { ValidationError, ProductCreationError } from '../utils/errors.js';
+import logger from '../utils/logger.js';
 
 // Function to create a product
 export const createProductService = async ({ name, category, description, subcategory, brand, images, variations }, userId) => {
@@ -30,8 +31,10 @@ export const createProductService = async ({ name, category, description, subcat
       seller: userId,
     });
 
+    logger.info(`Product created: ${name}`);
     return product;
   } catch (error) {
+    logger.error(`Create product service error: ${error.message}`);
     if (error instanceof ValidationError) {
       throw error; // Pass custom validation errors directly
     } else {
@@ -44,8 +47,10 @@ export const createProductService = async ({ name, category, description, subcat
 export const getProductsService = async () => {
   try {
     const products = await Product.find();
+    logger.info('Fetched all products');
     return products;
   } catch (error) {
+    logger.error(`Get products service error: ${error.message}`);
     throw new Error(error.message);
   }
 };
@@ -54,8 +59,10 @@ export const getProductsService = async () => {
 export const getProductByIdService = async (productId) => {
   try {
     const product = await Product.findById(productId);
+    logger.info(`Fetched product by ID: ${productId}`);
     return product;
   } catch (error) {
+    logger.error(`Get product by ID service error: ${error.message}`);
     throw new Error(error.message);
   }
 };
@@ -69,8 +76,10 @@ export const updateProductService = async (productId, updateData) => {
     }
 
     const product = await Product.findByIdAndUpdate(productId, updateData, { new: true });
+    logger.info(`Updated product: ${productId}`);
     return product;
   } catch (error) {
+    logger.error(`Update product service error: ${error.message}`);
     throw new Error(error.message);
   }
 };
@@ -79,8 +88,10 @@ export const updateProductService = async (productId, updateData) => {
 export const deleteProductService = async (productId) => {
   try {
     const product = await Product.findByIdAndDelete(productId);
+    logger.info(`Deleted product: ${productId}`);
     return product;
   } catch (error) {
+    logger.error(`Delete product service error: ${error.message}`);
     throw new Error(error.message);
   }
 };
