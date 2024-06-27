@@ -57,30 +57,24 @@ export const processPayment = async (order, paymentDetails) => {
   
   return paymentResult;
 };
+//for paypal
+export const processPaymentThroughPayPal = async (order, paymentDetails) => {
+  const paymentResult = await paypalPaymentGateway.createPayPalOrder(order.totalAmount, paymentDetails);
+  if (paymentResult.error) {
+    throw new CartOperationError('Payment failed');
+  }
 
-// for Paypal -> first create order and then capture it
-// export const processPayment = async (order, paymentDetails) => {
-//   const paymentResult = await paypalPaymentGateway.createPayPalOrder(order.totalAmount, paymentDetails);
-//   if (paymentResult.error) {
-//     throw new CartOperationError('Payment failed');
-//   }
+  // Attach payment details to the order if needed
+  order.payment = {
+    method: 'PayPal',
+    transactionId: paymentResult.id
+  };
+
+  await order.save();
   
-//   // Capture the payment
-//   const captureResult = await paypalPaymentGateway.capturePayPalPayment(paymentResult.id);
-//   if (captureResult.error) {
-//     throw new CartOperationError('Payment capture failed');
-//   }
+  return paymentResult; // Return the PayPal approval URL
+};
 
-//   // Attach payment details to the order if needed
-//   order.payment = {
-//     method: 'PayPal',
-//     transactionId: captureResult.id
-//   };
-
-//   await order.save();
-  
-//   return captureResult;
-// };
 
 export const updateStock = async (cart) => {
   for (const item of cart.items) {

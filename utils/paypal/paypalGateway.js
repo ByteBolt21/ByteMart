@@ -1,49 +1,89 @@
 import dotenv from 'dotenv';
-import paypal from '@paypal/checkout-server-sdk';
+import axios from 'axios';
 
 dotenv.config();
 
-let environment = new paypal.core.SandboxEnvironment(process.env.PAYPAL_CLIENT_ID, process.env.PAYPAL_CLIENT_SECRET);
-let client = new paypal.core.PayPalHttpClient(environment);
-
-// Function to create a PayPal order
-export const createPayPalOrder = async (amount, paymentDetails) => {
-  const request = new paypal.orders.OrdersCreateRequest();
-  request.prefer("return=representation");
-  request.requestBody({
-    intent: 'CAPTURE',
-    purchase_units: [{
-      amount: {
-        currency_code: 'USD',
-        value: Math.floor(amount) 
-      }
-    }],
-    payer: {
-      email_address: paymentDetails.email
+const generateAccessToken = async () => {
+  const response = await axios({
+    url: process.env.PAYPAL_BASE_URL + '/v1/oauth2/token',
+    method: 'post',
+    data: 'grant_type=client_credentials',
+    auth: {
+      username: process.env.PAYPAL_CLIENT_ID,
+      password: process.env.PAYPAL_SECRET
     }
   });
 
-  try {
-    const order = await client.execute(request);
-    return { id: order.result.id };
-  } catch (error) {
-    console.error('Error creating PayPal order:', error);
-    return { error: error.message };
+  return response.data.access_token;
+};
+
+export const createPayPalOrder = async (amount, paymentDetails) => {
+  const accessToken = await generateAccessToken();
+
+  const response = await axios({
+    url: `${process.env.PAYPAL_BASE_URL}/v2/checkout/orders`,
+    method: 'post',
+    headers: {
+      'Content-Type': 'application/json',
+      'Authorization': `Bearer ${accessToken}`
+    },
+    data: JSON.stringify({
+      intent: 'CAPTURE',
+      purchase_units: [{
+        amount: {
+          currency_code: 'USD',
+          value: amount.toFixed(2),
+          breakdown: {
+            item_total: {
+              currency_code: 'USD',
+              value: amount.toFixed(2)
+            }
+          }
+        }
+      }],
+      payer: {
+        email_address: paymentDetails.email
+      },
+      application_context: {
+        return_url: `${process.env.BASE_URL}/complete-order`,
+        cancel_url: `${process.env.BASE_URL}/cancel-order`,
+        shipping_preference: 'NO_SHIPPING',
+        user_action: 'PAY_NOW',
+        brand_name: 'YourBrandName'
+      }
+    })
+  });
+
+  if (response.data.links) {
+    return { id: response.data.id, approveLink: response.data.links.find(link => link.rel === 'approve').href };
+  } else {
+    throw new Error('Error creating PayPal order');
   }
 };
 
-// Function to capture a PayPal payment
+
+
 export const capturePayPalPayment = async (orderId) => {
-  const request = new paypal.orders.OrdersCaptureRequest(orderId);
-  request.requestBody({});
+  const accessToken = await generateAccessToken();
 
   try {
-    const capture = await client.execute(request);
-    return { id: capture.result.id, status: capture.result.status };
+    const response = await axios({
+      url: `${process.env.PAYPAL_BASE_URL}/v2/checkout/orders/${orderId}/capture`,
+      method: 'post',
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${accessToken}`
+      }
+    });
+    return response.data;
   } catch (error) {
-    console.error('Error capturing PayPal payment:', error);
-    return { error: error.message };
+    console.error('PayPal Capture Error:', error.response.data);
+    throw error;
   }
 };
 
 export default { createPayPalOrder, capturePayPalPayment };
+
+// user request on checkout.controller.js and we first create an order  in the paypal and then we send the approval link to the user
+// Then in frontend we redirect the user to the approval link and it open the "paypal payment page" after payment done by user we redirect the user to "complete-order" route
+// And in complete-order route we capture the payment from paypal and update the order status in our database.

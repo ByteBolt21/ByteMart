@@ -5,6 +5,7 @@ import {
     calculateTotalAmount,
     createOrder,
     processPayment,
+    processPaymentThroughPayPal,
     updateStock,
     clearCart,
     sendConfirmation
@@ -32,8 +33,11 @@ export const checkout = async (req, res, next) => {
         const order = await createOrder(userId, cart, totalAmount, shippingAddress, billingAddress);
 
         console.log("after order==========", order)
-        // Process payment
-        await processPayment(order, paymentDetails);
+        // Process payment for stripe 
+        // await processPayment(order, paymentDetails);
+        // Process payment for paypal 
+        const paymentResult = await processPaymentThroughPayPal(order, paymentDetails);
+
 
         console.log("payment==========DOne")
         // Update stock
@@ -44,9 +48,41 @@ export const checkout = async (req, res, next) => {
 
         // Send confirmation
         await sendConfirmation(order);
+        // for stripe 
+        // res.status(200).json({ message: 'Checkout successful', order });
+        // for Paypal     
+        res.status(200).json({ message: 'Checkout initiated', order, approvalUrl: paymentResult.approveLink });
 
-        res.status(200).json({ message: 'Checkout successful', order });
     } catch (error) {
         next(error);
     }
 };
+
+
+export const completeOrder = async (req, res, next) => {
+    const { token, PayerID } = req.query; // These are the query parameters PayPal will return
+  
+    try {
+      // Capture the payment
+      const captureResult = await capturePayPalPayment(token);
+  
+      // Update the order status
+      const order = await Order.findOne({ 'payment.transactionId': token });
+      if (!order) throw new NotFoundError('Order not found');
+  
+      order.status = 'Completed';
+      await order.save();
+  
+      // Notify the user
+      await sendConfirmation(order);
+  
+      res.status(200).json({ message: 'Payment completed successfully', order });
+  
+    } catch (error) {
+      next(error);
+    }
+  };
+  
+  export const cancelOrder = (req, res) => {
+    res.status(200).json({ message: 'Payment cancelled' });
+  };
