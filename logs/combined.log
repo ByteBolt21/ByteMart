@@ -16,3 +16,14 @@
 2024-06-27T07:02:58.351Z [[32minfo[39m]: Payment processed successfully for PayPal: Order ID 667d0e9e714d7f7c32ac6e4b
 2024-06-27T07:02:58.811Z [[32minfo[39m]: Order confirmation sent for order: Order ID 667d0e9e714d7f7c32ac6e4b
 2024-06-27T07:02:58.813Z [[32minfo[39m]: Confirmation sent for order: Order ID 667d0e9e714d7f7c32ac6e4b
+2024-06-27T07:50:39.038Z [[32minfo[39m]: User signed in successfully: johndoeSeller
+2024-06-27T07:52:31.863Z [[31merror[39m]: Error searching products: Product is not defined
+2024-06-27T07:53:05.059Z [[32minfo[39m]: Fetched all products
+2024-06-27T07:53:05.062Z [[32minfo[39m]: All products fetched successfully
+2024-06-27T08:01:05.714Z [[31merror[39m]: Error searching products: Operation `products.find()` buffering timed out after 10000ms
+2024-06-27T08:04:02.073Z [[31merror[39m]: Error searching products: Operation `products.find()` buffering timed out after 10000ms
+2024-06-27T08:04:45.356Z [[31merror[39m]: Update product service error: Operation `products.findOneAndUpdate()` buffering timed out after 10000ms
+2024-06-27T08:04:45.358Z [[31merror[39m]: Update product error: Operation `products.findOneAndUpdate()` buffering timed out after 10000ms
+2024-06-27T08:04:58.063Z [[32minfo[39m]: Updated product: 667b9f8afd3931fce4646082
+2024-06-27T08:04:58.068Z [[32minfo[39m]: Product updated successfully: Updated Sample Product
+2024-06-27T08:05:06.968Z [[32minfo[39m]: Products searched successfully with query: {"category":"Tape"}

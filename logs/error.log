@@ -1,2 +1,7 @@
 2024-06-27T06:18:31.086Z [[31merror[39m]: Signup error: All fields are required
 2024-06-27T06:18:42.592Z [[31merror[39m]: Signup error: All fields are required
+2024-06-27T07:52:31.863Z [[31merror[39m]: Error searching products: Product is not defined
+2024-06-27T08:01:05.714Z [[31merror[39m]: Error searching products: Operation `products.find()` buffering timed out after 10000ms
+2024-06-27T08:04:02.073Z [[31merror[39m]: Error searching products: Operation `products.find()` buffering timed out after 10000ms
+2024-06-27T08:04:45.356Z [[31merror[39m]: Update product service error: Operation `products.findOneAndUpdate()` buffering timed out after 10000ms
+2024-06-27T08:04:45.358Z [[31merror[39m]: Update product error: Operation `products.findOneAndUpdate()` buffering timed out after 10000ms

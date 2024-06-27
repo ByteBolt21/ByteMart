@@ -6,6 +6,8 @@ import {
   updateProductService,
   deleteProductService
 } from '../services/product.service.js';
+import Product from '../models/product.model.js';
+
 
 import { ValidationError, ProductCreationError } from '../utils/errors.js';
 import logger from '../utils/logger.js';
@@ -108,6 +110,44 @@ export const deleteProduct = async (req, res, next) => {
     res.json({ message: 'Product deleted successfully' });
   } catch (error) {
     logger.error(`Delete product error: ${error.message}`);
+    res.status(500).json({ error: error.message });
+  }
+};
+
+// Controller function to search products
+export const searchProducts = async (req, res) => {
+  console.log("inSearch===============")
+  const { name, category, minPrice, maxPrice, brand, subcategory } = req.query;
+  let query = {};
+
+  if (name) {
+    query.name = { $regex: name, $options: 'i' }; // Case-insensitive regex search
+  }
+  if (category) {
+    query.category = category;
+  }
+  if (brand) {
+    query.brand = brand;
+  }
+  if (subcategory) {
+    query.subcategory = subcategory;
+  }
+  if (minPrice || maxPrice) {
+    query.price = {};
+    if (minPrice) {
+      query.price.$gte = parseFloat(minPrice);
+    }
+    if (maxPrice) {
+      query.price.$lte = parseFloat(maxPrice);
+    }
+  }
+
+  try {
+    const products = await Product.find(query);
+    logger.info(`Products searched successfully with query: ${JSON.stringify(query)}`);
+    res.status(200).json(products);
+  } catch (error) {
+    logger.error(`Error searching products: ${error.message}`);
     res.status(500).json({ error: error.message });
   }
 };
