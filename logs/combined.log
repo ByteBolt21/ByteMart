@@ -66,3 +66,12 @@
 2024-06-28T08:13:30.972Z [[31merror[39m]: Error exporting users: fs is not defined
 2024-06-28T08:13:46.796Z [[31merror[39m]: Error exporting users: ENOENT: no such file or directory, open 'D:\ByteBolt\ByteMart\exports\users.csv'
 2024-06-28T08:19:15.081Z [[32minfo[39m]: CSV file sent successfully
+2024-06-28T08:35:25.110Z [[32minfo[39m]: User signed in successfully: johndoeSeller
+2024-06-28T08:35:35.930Z [[32minfo[39m]: Fetched all products
+2024-06-28T08:35:35.931Z [[32minfo[39m]: All products fetched successfully
+2024-06-28T08:36:05.721Z [[32minfo[39m]: Export products process initiated
+2024-06-28T08:36:05.927Z [[32minfo[39m]: Headers set for CSV file download
+2024-06-28T08:36:05.928Z [[32minfo[39m]: CSV file sent successfully
+2024-06-28T08:37:17.080Z [[32minfo[39m]: Export products process initiated
+2024-06-28T08:37:17.250Z [[32minfo[39m]: Headers set for CSV file download
+2024-06-28T08:37:17.253Z [[32minfo[39m]: CSV file sent successfully

@@ -8,7 +8,7 @@ import {
   reshuffleProductsService
 } from '../services/product.service.js';
 import Product from '../models/product.model.js';
-
+import { Parser } from 'json2csv';
 
 import { ValidationError, ProductCreationError } from '../utils/errors.js';
 import logger from '../utils/logger.js';
@@ -162,6 +162,48 @@ export const getShuffledProducts = async (req, res) => {
     res.json(products);
   } catch (error) {
     logger.error(`Error fetching shuffled products: ${error.message}`);
+    res.status(500).json({ error: error.message });
+  }
+};
+
+
+
+export const exportProductsCsv = async (req, res) => {
+  try {
+    logger.info('Export products process initiated');
+
+    // Fetch product data from the database
+    const products = await Product.find().populate('seller', 'username email');
+    logger.debug(`Fetched ${products.length} products from the database`);
+
+    if (!products.length) {
+      logger.warn('No products found');
+      return res.status(404).json({ error: 'No products found' });
+    }
+
+    // Define the fields for the CSV file
+    const fields = [
+      '_id', 'name', 'category', 'description', 'subcategory', 'brand', 'images',
+      { label: 'Seller Username', value: 'seller.username' },
+      { label: 'Seller Email', value: 'seller.email' },
+      'variations.color', 'variations.size', 'variations.price', 'variations.stock', 'createdAt'
+    ];
+    const opts = { fields };
+
+    // Parse the data to CSV format
+    const parser = new Parser(opts);
+    const csvData = parser.parse(products);
+    logger.debug('Parsed product data to CSV format');
+
+    // Set headers to indicate file download
+    res.header('Content-Type', 'text/csv');
+    res.attachment('products.csv');  // This line indicates that the response should be downloaded as a file named 'products.csv'
+    logger.info('Headers set for CSV file download');
+    res.send(csvData);
+    logger.info('CSV file sent successfully');
+
+  } catch (error) {
+    logger.error(`Error exporting products: ${error.message}`);
     res.status(500).json({ error: error.message });
   }
 };
