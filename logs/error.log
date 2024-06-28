@@ -9,3 +9,6 @@
 2024-06-28T07:23:19.898Z [[31merror[39m]: Failed to add item to cart: Variation not found for product with color Green and size Large
 2024-06-28T07:23:32.508Z [[31merror[39m]: Add to cart service error: Variation not found for product with color Green and size Large
 2024-06-28T07:23:32.511Z [[31merror[39m]: Failed to add item to cart: Variation not found for product with color Green and size Large
+2024-06-28T08:13:05.379Z [[31merror[39m]: Error exporting users: path is not defined
+2024-06-28T08:13:30.972Z [[31merror[39m]: Error exporting users: fs is not defined
+2024-06-28T08:13:46.796Z [[31merror[39m]: Error exporting users: ENOENT: no such file or directory, open 'D:\ByteBolt\ByteMart\exports\users.csv'

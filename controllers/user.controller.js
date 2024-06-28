@@ -4,7 +4,9 @@ import jwt from 'jsonwebtoken';
 import { ValidationError } from '../utils/errors.js';
 import { isValidObjectId } from 'mongoose';
 import logger from '../utils/logger.js';
-
+import { Parser } from 'json2csv';
+import fs from 'fs';
+import path from 'path';
 export const signup = async (req, res, next) => {
   const { fullName, username, email, role, number, password } = req.body;
   try {
@@ -126,5 +128,35 @@ export const deleteUser = async (req, res, next) => {
   } catch (error) {
     logger.error(`Delete user error: ${error.message}`);
     next(error);
+  }
+};
+
+
+export const exportUsers = async (req, res) => {
+  try {
+    // Fetch user data from the database
+    const users = await User.find();
+
+    if (!users.length) {
+      return res.status(404).json({ error: 'No users found' });
+    }
+
+    // Define the fields for the CSV file
+    const fields = ['_id', 'fullName', 'username', 'email', 'number', 'role', 'isVerified', 'createdAt'];
+    const opts = { fields };
+
+    // Parse the data to CSV format
+    const parser = new Parser(opts);
+    const csvData = parser.parse(users);
+
+    // Set headers to indicate file download
+    res.header('Content-Type', 'text/csv');
+    res.attachment('users.csv'); //this send the file in the client side if we open this link in browser (http://localhost:5000/api/users/export) the file automatically gets download with name of users.csv
+    res.send(csvData);
+    logger.info('CSV file sent successfully');
+    
+  } catch (error) {
+    logger.error(`Error exporting users: ${error.message}`);
+    res.status(500).json({ error: error.message });
   }
 };

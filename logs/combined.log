@@ -62,3 +62,7 @@
 2024-06-28T07:31:34.918Z [[32minfo[39m]: PayPal payment initiated for user ID 667a47c87e7b351ec5fc3446: Order ID 667e66d3f15afd5a2646d6fe
 2024-06-28T07:32:43.087Z [[32minfo[39m]: Fetched all products
 2024-06-28T07:32:43.088Z [[32minfo[39m]: All products fetched successfully
+2024-06-28T08:13:05.379Z [[31merror[39m]: Error exporting users: path is not defined
+2024-06-28T08:13:30.972Z [[31merror[39m]: Error exporting users: fs is not defined
+2024-06-28T08:13:46.796Z [[31merror[39m]: Error exporting users: ENOENT: no such file or directory, open 'D:\ByteBolt\ByteMart\exports\users.csv'
+2024-06-28T08:19:15.081Z [[32minfo[39m]: CSV file sent successfully
