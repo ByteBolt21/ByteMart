@@ -95,3 +95,19 @@ export const deleteProductService = async (productId) => {
     throw new Error(error.message);
   }
 };
+
+
+export const reshuffleProductsService = async () => {
+  try {
+    const products = await Product.find();
+    
+    // Implement your reshuffle logic here
+    const shuffledProducts = products.sort(() => Math.random() - 0.5);
+
+    logger.info('Products reshuffled successfully');
+    return shuffledProducts;
+  } catch (error) {
+    logger.error(`Reshuffle products service error: ${error.message}`);
+    throw new Error(error.message);
+  }
+};

@@ -5,3 +5,7 @@
 2024-06-27T08:04:02.073Z [[31merror[39m]: Error searching products: Operation `products.find()` buffering timed out after 10000ms
 2024-06-27T08:04:45.356Z [[31merror[39m]: Update product service error: Operation `products.findOneAndUpdate()` buffering timed out after 10000ms
 2024-06-27T08:04:45.358Z [[31merror[39m]: Update product error: Operation `products.findOneAndUpdate()` buffering timed out after 10000ms
+2024-06-28T07:23:19.895Z [[31merror[39m]: Add to cart service error: Variation not found for product with color Green and size Large
+2024-06-28T07:23:19.898Z [[31merror[39m]: Failed to add item to cart: Variation not found for product with color Green and size Large
+2024-06-28T07:23:32.508Z [[31merror[39m]: Add to cart service error: Variation not found for product with color Green and size Large
+2024-06-28T07:23:32.511Z [[31merror[39m]: Failed to add item to cart: Variation not found for product with color Green and size Large

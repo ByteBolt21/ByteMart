@@ -4,7 +4,8 @@ import {
   getProductsService,
   getProductByIdService,
   updateProductService,
-  deleteProductService
+  deleteProductService,
+  reshuffleProductsService
 } from '../services/product.service.js';
 import Product from '../models/product.model.js';
 
@@ -148,6 +149,19 @@ export const searchProducts = async (req, res) => {
     res.status(200).json(products);
   } catch (error) {
     logger.error(`Error searching products: ${error.message}`);
+    res.status(500).json({ error: error.message });
+  }
+};
+
+
+
+
+export const getShuffledProducts = async (req, res) => {
+  try {
+    const products = await reshuffleProductsService();
+    res.json(products);
+  } catch (error) {
+    logger.error(`Error fetching shuffled products: ${error.message}`);
     res.status(500).json({ error: error.message });
   }
 };
