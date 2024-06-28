@@ -5,8 +5,6 @@ import { ValidationError } from '../utils/errors.js';
 import { isValidObjectId } from 'mongoose';
 import logger from '../utils/logger.js';
 import { Parser } from 'json2csv';
-import fs from 'fs';
-import path from 'path';
 export const signup = async (req, res, next) => {
   const { fullName, username, email, role, number, password } = req.body;
   try {
