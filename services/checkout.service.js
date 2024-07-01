@@ -5,7 +5,7 @@ import { NotFoundError, ValidationError, CartOperationError } from '../utils/err
 import stripePaymentGateway from '../utils/stripe/stripeGateway.js';
 import paypalPaymentGateway from '../utils/paypal/paypalGateway.js';
 import logger from '../utils/logger.js';
-import sendEmail from '../utils/sendEmail.js';
+import sendEmail from '../utils/nodemailer.js';
 
 export const verifyCartContents = async (userId) => {
   try {
