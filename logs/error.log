@@ -12,3 +12,14 @@
 2024-06-28T08:13:05.379Z [[31merror[39m]: Error exporting users: path is not defined
 2024-06-28T08:13:30.972Z [[31merror[39m]: Error exporting users: fs is not defined
 2024-06-28T08:13:46.796Z [[31merror[39m]: Error exporting users: ENOENT: no such file or directory, open 'D:\ByteBolt\ByteMart\exports\users.csv'
+2024-07-01T08:04:09.801Z [[31merror[39m]: Error sending email: Can't send mail - all recipients were rejected: 501 5.1.5 Recipient address reserved by RFC 2606
+2024-07-01T08:04:09.810Z [[31merror[39m]: Signup error: Can't send mail - all recipients were rejected: 501 5.1.5 Recipient address reserved by RFC 2606
+2024-07-01T08:05:23.378Z [[31merror[39m]: Signup error: Username or email already exists
+2024-07-01T08:08:53.143Z [[31merror[39m]: Signup error: Username or email already exists
+2024-07-01T08:11:56.484Z [[31merror[39m]: Error sending email: 244C0000:error:0A00010B:SSL routines:ssl3_get_record:wrong version number:c:\ws\deps\openssl\openssl\ssl\record\ssl3_record.c:355:
+
+2024-07-01T08:11:56.488Z [[31merror[39m]: Signup error: 244C0000:error:0A00010B:SSL routines:ssl3_get_record:wrong version number:c:\ws\deps\openssl\openssl\ssl\record\ssl3_record.c:355:
+
+2024-07-01T08:22:06.517Z [[31merror[39m]: Error sending email: Invalid greeting. response=* OK The Microsoft Exchange IMAP4 service is ready. [RABYADAAUAAyADcAMwBDAEEAMAAwADcAOQAuAEEAUgBFAFAAMgA3ADMALgBQAFIATwBEAC4ATwBVAFQATABPAE8ASwAuAEMATwBNAA==]: * OK The Microsoft Exchange IMAP4 service is ready. [RABYADAAUAAyADcAMwBDAEEAMAAwADcAOQAuAEEAUgBFAFAAMgA3ADMALgBQAFIATwBEAC4ATwBVAFQATABPAE8ASwAuAEMATwBNAA==]
+2024-07-01T08:22:06.525Z [[31merror[39m]: Signup error: Invalid greeting. response=* OK The Microsoft Exchange IMAP4 service is ready. [RABYADAAUAAyADcAMwBDAEEAMAAwADcAOQAuAEEAUgBFAFAAMgA3ADMALgBQAFIATwBEAC4ATwBVAFQATABPAE8ASwAuAEMATwBNAA==]: * OK The Microsoft Exchange IMAP4 service is ready. [RABYADAAUAAyADcAMwBDAEEAMAAwADcAOQAuAEEAUgBFAFAAMgA3ADMALgBQAFIATwBEAC4ATwBVAFQATABPAE8ASwAuAEMATwBNAA==]
+2024-07-01T08:25:53.239Z [[31merror[39m]: Signup error: Username or email already exists

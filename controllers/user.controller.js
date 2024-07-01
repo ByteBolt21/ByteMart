@@ -5,6 +5,10 @@ import { ValidationError } from '../utils/errors.js';
 import { isValidObjectId } from 'mongoose';
 import logger from '../utils/logger.js';
 import { Parser } from 'json2csv';
+
+import crypto from 'crypto';
+import sendEmail from '../utils/nodemailer.js';
+
 export const signup = async (req, res, next) => {
   const { fullName, username, email, role, number, password } = req.body;
   try {
@@ -18,9 +22,17 @@ export const signup = async (req, res, next) => {
     }
 
     const user = new User({ fullName, username, email, role, number, password });
+    const verificationToken = crypto.randomBytes(32).toString('hex');
+    user.verificationToken = verificationToken;
+    user.verificationTokenExpires = Date.now() + 3600000; // 1 hour
+
     const saveUser = await user.save();
+
+    const verificationLink = `http://localhost:5000/api/users/verify/${verificationToken}`;
+    await sendEmail(email, 'Verify Your Email', `Click this link to verify your email: ${verificationLink}`);
+
     logger.info(`User registered successfully: ${username}`);
-    res.status(201).json({ message: 'User registered successfully', saveUser });
+    res.status(201).json({ message: 'User registered successfully. Please check your email to verify your account.', saveUser });
   } catch (error) {
     logger.error(`Signup error: ${error.message}`);
     if (error instanceof ValidationError) {
@@ -156,5 +168,28 @@ export const exportUsers = async (req, res) => {
   } catch (error) {
     logger.error(`Error exporting users: ${error.message}`);
     res.status(500).json({ error: error.message });
+  }
+};
+
+
+export const verifyUser = async (req, res, next) => {
+  const { token } = req.params;
+  try {
+    const user = await User.findOne({ verificationToken: token, verificationTokenExpires: { $gt: Date.now() } });
+
+    if (!user) {
+      throw new ValidationError('Verification token is invalid or has expired');
+    }
+
+    user.isVerified = true;
+    user.verificationToken = undefined;
+    user.verificationTokenExpires = undefined;
+    await user.save();
+
+    logger.info(`User verified successfully: ${user.username}`);
+    res.status(200).json({ message: 'User verified successfully' });
+  } catch (error) {
+    logger.error(`Verification error: ${error.message}`);
+    next(error);
   }
 };

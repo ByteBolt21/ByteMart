@@ -1,12 +1,13 @@
 import express from 'express';
 const router = express.Router();
 
-import { signup, signin, getAllUsers, getUserById, deleteUser , updateUser, exportUsers } from '../controllers/user.controller.js';
+import { signup, signin, getAllUsers, getUserById, deleteUser , updateUser, exportUsers , verifyUser } from '../controllers/user.controller.js';
 import auth from '../middlewares/auth.js';
 
 // Routes for user signup and signin
 router.post('/signup', signup);
 router.post('/signin', signin);
+router.get('/verify/:token', verifyUser);
 
 //export users
 router.get('/export', auth(['seller']),exportUsers);

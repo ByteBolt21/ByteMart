@@ -11,11 +11,14 @@ const UserSchema = new Schema({
   password: { type: String, required: true },
   role: { type: String, enum: ['buyer', 'seller', 'admin'], default: 'buyer' },
   isVerified: { type: Boolean, default: false },
+  verificationToken: { type: String },
+  verificationTokenExpires: { type: Date },
   createdAt: { type: Date, default: Date.now },
 }, {
   timestamps: true,
   collection: 'users'
 });
+
 
 UserSchema.pre('save', async function(next) {
   if (!this.isModified('password')) return next();
