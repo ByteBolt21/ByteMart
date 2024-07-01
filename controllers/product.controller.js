@@ -13,9 +13,11 @@ import { Parser } from 'json2csv';
 import { ValidationError, ProductCreationError } from '../utils/errors.js';
 import logger from '../utils/logger.js';
 
-// Controller function to create a product
+
+
 export const createProduct = async (req, res, next) => {
-  const { name, category, description, subcategory, brand, images, variations } = req.body;
+  const { name, category, description, subcategory, brand, variations } = req.body;
+  const images = req.files.map(file => file.path);
 
   try {
     // Validate request data
@@ -43,6 +45,37 @@ export const createProduct = async (req, res, next) => {
   }
 };
 
+export const updateProduct = async (req, res, next) => {
+  const { id } = req.params;
+  const images = req.files ? req.files.map(file => file.path) : undefined;
+  const updateData = req.body;
+
+  if (!isValidObjectId(id)) {
+    return next(new ValidationError('Invalid product ID format'));
+  }
+
+  if (images) {
+    updateData.images = images;
+  }
+
+  try {
+    if (updateData.variations && !updateData.variations.every(variation => variation.stock != null && variation.price != null)) {
+      throw new ValidationError('Each variation must have stock and price');
+    }
+
+    const product = await updateProductService(id, updateData);
+    if (!product) return res.status(404).json({ error: 'Product not found' });
+    logger.info(`Product updated successfully: ${product.name}`);
+    res.json(product);
+  } catch (error) {
+    logger.error(`Update product error: ${error.message}`);
+    if (error instanceof ValidationError) {
+      res.status(400).json({ error: error.message });
+    } else {
+      res.status(500).json({ error: error.message });
+    }
+  }
+};
 // Controller function to get all products
 export const getProducts = async (req, res) => {
   try {
@@ -72,31 +105,7 @@ export const getProductById = async (req, res, next) => {
   }
 };
 
-// Controller function to update a product by ID
-export const updateProduct = async (req, res, next) => {
-  const { id } = req.params;
-  if (!isValidObjectId(id)) {
-    return next(new ValidationError('Invalid product ID format'));
-  }
-  const updateData = req.body;
-  try {
-    if (updateData.variations && !updateData.variations.every(variation => variation.stock != null && variation.price != null)) {
-      throw new ValidationError('Each variation must have stock and price');
-    }
 
-    const product = await updateProductService(id, updateData);
-    if (!product) return res.status(404).json({ error: 'Product not found' });
-    logger.info(`Product updated successfully: ${product.name}`);
-    res.json(product);
-  } catch (error) {
-    logger.error(`Update product error: ${error.message}`);
-    if (error instanceof ValidationError) {
-      res.status(400).json({ error: error.message });
-    } else {
-      res.status(500).json({ error: error.message });
-    }
-  }
-};
 
 // Controller function to delete a product by ID
 export const deleteProduct = async (req, res, next) => {

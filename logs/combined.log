@@ -75,3 +75,10 @@
 2024-06-28T08:37:17.080Z [[32minfo[39m]: Export products process initiated
 2024-06-28T08:37:17.250Z [[32minfo[39m]: Headers set for CSV file download
 2024-06-28T08:37:17.253Z [[32minfo[39m]: CSV file sent successfully
+2024-07-01T06:40:18.522Z [[32minfo[39m]: User signed in successfully: johndoeSeller
+2024-07-01T06:55:29.458Z [[32minfo[39m]: Product created: Product with Cloudinary
+2024-07-01T06:55:29.469Z [[32minfo[39m]: Product created successfully: Product with Cloudinary
+2024-07-01T07:01:27.161Z [[32minfo[39m]: Updated product: 668252e1de110c59be57231c
+2024-07-01T07:01:27.163Z [[32minfo[39m]: Product updated successfully: Sample Product 34
+2024-07-01T07:02:08.644Z [[32minfo[39m]: Fetched all products
+2024-07-01T07:02:08.647Z [[32minfo[39m]: All products fetched successfully
