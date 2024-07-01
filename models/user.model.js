@@ -13,12 +13,13 @@ const UserSchema = new Schema({
   isVerified: { type: Boolean, default: false },
   verificationToken: { type: String },
   verificationTokenExpires: { type: Date },
+  resetPasswordToken: { type: String },
+  resetPasswordExpires: { type: Date },
   createdAt: { type: Date, default: Date.now },
 }, {
   timestamps: true,
   collection: 'users'
 });
-
 
 UserSchema.pre('save', async function(next) {
   if (!this.isModified('password')) return next();

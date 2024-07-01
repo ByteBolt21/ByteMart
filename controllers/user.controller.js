@@ -5,7 +5,6 @@ import { ValidationError } from '../utils/errors.js';
 import { isValidObjectId } from 'mongoose';
 import logger from '../utils/logger.js';
 import { Parser } from 'json2csv';
-
 import crypto from 'crypto';
 import sendEmail from '../utils/nodemailer.js';
 
@@ -190,6 +189,61 @@ export const verifyUser = async (req, res, next) => {
     res.status(200).json({ message: 'User verified successfully' });
   } catch (error) {
     logger.error(`Verification error: ${error.message}`);
+    next(error);
+  }
+};
+
+
+
+export const requestPasswordReset = async (req, res, next) => {
+  const { email } = req.body;
+  try {
+    const user = await User.findOne({ email });
+    if (!user) {
+      throw new ValidationError('User with this email does not exist');
+    }
+
+    const resetToken = crypto.randomBytes(32).toString('hex');
+    user.resetPasswordToken = resetToken;
+    user.resetPasswordExpires = Date.now() + 3600000; // 1 hour
+
+    await user.save();
+
+    const resetLink = `http://localhost:5000/api/users/reset-password/${resetToken}`;
+    await sendEmail(email, 'Password Reset', `Click this link to reset your password: ${resetLink}`);
+
+    logger.info(`Password reset email sent: ${email}`);
+    res.status(200).json({ message: 'Password reset email sent' });
+  } catch (error) {
+    logger.error(`Request password reset error: ${error.message}`);
+    next(error);
+  }
+};
+
+export const resetPassword = async (req, res, next) => {
+  const { token } = req.params;
+  const { newPassword, confirmPassword } = req.body;
+
+  if (newPassword !== confirmPassword) {
+    return next(new ValidationError('Passwords do not match'));
+  }
+
+  try { 
+    const user = await User.findOne({ resetPasswordToken: token, resetPasswordExpires: { $gt: Date.now() } });
+    if (!user) {
+      throw new ValidationError('Password reset token is invalid or has expired');
+    }
+
+    user.password = newPassword;
+    user.resetPasswordToken = undefined;
+    user.resetPasswordExpires = undefined;
+
+    await user.save();
+
+    logger.info(`Password reset successfully for user: ${user.email}`);
+    res.status(200).json({ message: 'Password reset successfully' });
+  } catch (error) {
+    logger.error(`Password reset error: ${error.message}`);
     next(error);
   }
 };

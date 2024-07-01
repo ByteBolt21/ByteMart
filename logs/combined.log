@@ -162,3 +162,8 @@
 2024-07-01T09:29:46.498Z [[31merror[39m]: Signup error: Username or email already exists
 2024-07-01T09:30:14.219Z [[32minfo[39m]: Email sent to imhassaan.dev@outlook.com
 2024-07-01T09:30:14.223Z [[32minfo[39m]: User registered successfully: hassaanistic.outlook
+2024-07-01T09:49:33.805Z [[32minfo[39m]: Email sent to imhassaan.dev@outlook.com
+2024-07-01T09:49:33.814Z [[32minfo[39m]: Password reset email sent: imhassaan.dev@outlook.com
+2024-07-01T09:50:49.379Z [[32minfo[39m]: Password reset successfully for user: imhassaan.dev@outlook.com
+2024-07-01T09:51:09.721Z [[31merror[39m]: Signin error: Invalid credentials
+2024-07-01T09:51:15.054Z [[32minfo[39m]: User signed in successfully: hassaanistic.outlook
