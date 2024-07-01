@@ -125,3 +125,40 @@
 2024-07-01T08:38:25.801Z [[32minfo[39m]: User registered successfully: hassaan.dev
 2024-07-01T08:39:03.960Z [[32minfo[39m]: Email sent to hassaanistic@gmail.com
 2024-07-01T08:39:03.969Z [[32minfo[39m]: User registered successfully: hassaanistic.dev
+2024-07-01T09:00:44.175Z [[31merror[39m]: Signup error: Username or email already exists
+2024-07-01T09:00:59.413Z [[31merror[39m]: Error sending email: Invalid login: 535 5.7.139 Authentication unsuccessful, the user credentials were incorrect. [DX0P273CA0003.AREP273.PROD.OUTLOOK.COM 2024-07-01T09:00:58.834Z 08DC98529261104F]
+2024-07-01T09:00:59.416Z [[31merror[39m]: Signup error: Invalid login: 535 5.7.139 Authentication unsuccessful, the user credentials were incorrect. [DX0P273CA0003.AREP273.PROD.OUTLOOK.COM 2024-07-01T09:00:58.834Z 08DC98529261104F]
+2024-07-01T09:01:44.810Z [[31merror[39m]: Signup error: Username or email already exists
+2024-07-01T09:02:04.119Z [[32minfo[39m]: All users fetched successfully
+2024-07-01T09:02:20.940Z [[32minfo[39m]: User deleted successfully: hassaan.dev
+2024-07-01T09:02:23.766Z [[32minfo[39m]: User deleted successfully: hassaanistic.dev
+2024-07-01T09:02:26.843Z [[32minfo[39m]: User deleted successfully: hassaanistic.dev.outlook
+2024-07-01T09:02:35.823Z [[32minfo[39m]: Email sent to imhassaan.dev@otlook.com
+2024-07-01T09:02:35.825Z [[32minfo[39m]: User registered successfully: hassaanistic.dev.outlook
+2024-07-01T09:08:01.283Z [[32minfo[39m]: Email sent to hassaanistic@gmail.com
+2024-07-01T09:08:01.293Z [[32minfo[39m]: User registered successfully: hassaanits.dev
+2024-07-01T09:11:07.741Z [[32minfo[39m]: Email sent to imhassaan.dev@gmail.com
+2024-07-01T09:11:07.749Z [[32minfo[39m]: User registered successfully: hassaan.dev
+2024-07-01T09:12:01.873Z [[31merror[39m]: Signup error: Username or email already exists
+2024-07-01T09:12:16.270Z [[32minfo[39m]: All users fetched successfully
+2024-07-01T09:12:40.176Z [[32minfo[39m]: User deleted successfully: hassaanistic
+2024-07-01T09:12:43.286Z [[32minfo[39m]: User deleted successfully: hassaanistic.dev.outlook
+2024-07-01T09:12:46.664Z [[32minfo[39m]: User deleted successfully: hassaanits.dev
+2024-07-01T09:12:49.005Z [[32minfo[39m]: User deleted successfully: hassaan.dev
+2024-07-01T09:13:10.977Z [[32minfo[39m]: Email sent to imhassaan.dev@otlook.com
+2024-07-01T09:13:10.980Z [[32minfo[39m]: User registered successfully: hassaanistic.dev.outlook
+2024-07-01T09:18:56.656Z [[32minfo[39m]: User deleted successfully: hassaanistic.dev.outlook
+2024-07-01T09:19:40.369Z [[32minfo[39m]: Email sent to imhassaan.dev@otlook.com
+2024-07-01T09:19:40.376Z [[32minfo[39m]: User registered successfully: hassaanistic.dev.outlook
+2024-07-01T09:23:25.867Z [[32minfo[39m]: User deleted successfully: hassaanistic.dev.outlook
+2024-07-01T09:23:35.481Z [[32minfo[39m]: Email sent to imhassaan.dev@otlook.com
+2024-07-01T09:23:35.482Z [[32minfo[39m]: User registered successfully: hassaanistic.dev.outlook
+2024-07-01T09:28:10.438Z [[32minfo[39m]: User deleted successfully: hassaanistic.dev.outlook
+2024-07-01T09:28:21.709Z [[32minfo[39m]: Email sent to imhassaan.dev@otlook.com
+2024-07-01T09:28:21.711Z [[32minfo[39m]: User registered successfully: hassaanistic.dev.outlook
+2024-07-01T09:28:45.205Z [[32minfo[39m]: Email sent to m.hassaananjum003@gmail.com
+2024-07-01T09:28:45.207Z [[32minfo[39m]: User registered successfully: hassaanistic
+2024-07-01T09:29:15.351Z [[32minfo[39m]: User verified successfully: hassaanistic
+2024-07-01T09:29:46.498Z [[31merror[39m]: Signup error: Username or email already exists
+2024-07-01T09:30:14.219Z [[32minfo[39m]: Email sent to imhassaan.dev@outlook.com
+2024-07-01T09:30:14.223Z [[32minfo[39m]: User registered successfully: hassaanistic.outlook

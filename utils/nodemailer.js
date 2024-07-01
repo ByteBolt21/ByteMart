@@ -1,16 +1,18 @@
 import nodemailer from 'nodemailer';
 import logger from './logger.js';
 
+
 const sendEmail = async (to, subject, text) => {
   try {
     const transporter = nodemailer.createTransport({
-      host: 'smtp-mail.outlook.com',
-      port: 587,
+      host:  process.env.SMTP_HOST,
+      port:  process.env.SMTP_PORT,
     //   secure: false, // true for 465, false for other ports
-      service : "outlook",
+      service : process.env.SMTP_SERIVCE,
+      secure: false,
       auth: {
-        user: 'hassaananjum001@outlook.com',
-        pass: '******'
+        user:  process.env.SMTP_MAIL,
+        pass:  process.env.SMTP_PASSWORD
       },
     });
 

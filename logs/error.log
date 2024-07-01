@@ -23,3 +23,9 @@
 2024-07-01T08:22:06.517Z [[31merror[39m]: Error sending email: Invalid greeting. response=* OK The Microsoft Exchange IMAP4 service is ready. [RABYADAAUAAyADcAMwBDAEEAMAAwADcAOQAuAEEAUgBFAFAAMgA3ADMALgBQAFIATwBEAC4ATwBVAFQATABPAE8ASwAuAEMATwBNAA==]: * OK The Microsoft Exchange IMAP4 service is ready. [RABYADAAUAAyADcAMwBDAEEAMAAwADcAOQAuAEEAUgBFAFAAMgA3ADMALgBQAFIATwBEAC4ATwBVAFQATABPAE8ASwAuAEMATwBNAA==]
 2024-07-01T08:22:06.525Z [[31merror[39m]: Signup error: Invalid greeting. response=* OK The Microsoft Exchange IMAP4 service is ready. [RABYADAAUAAyADcAMwBDAEEAMAAwADcAOQAuAEEAUgBFAFAAMgA3ADMALgBQAFIATwBEAC4ATwBVAFQATABPAE8ASwAuAEMATwBNAA==]: * OK The Microsoft Exchange IMAP4 service is ready. [RABYADAAUAAyADcAMwBDAEEAMAAwADcAOQAuAEEAUgBFAFAAMgA3ADMALgBQAFIATwBEAC4ATwBVAFQATABPAE8ASwAuAEMATwBNAA==]
 2024-07-01T08:25:53.239Z [[31merror[39m]: Signup error: Username or email already exists
+2024-07-01T09:00:44.175Z [[31merror[39m]: Signup error: Username or email already exists
+2024-07-01T09:00:59.413Z [[31merror[39m]: Error sending email: Invalid login: 535 5.7.139 Authentication unsuccessful, the user credentials were incorrect. [DX0P273CA0003.AREP273.PROD.OUTLOOK.COM 2024-07-01T09:00:58.834Z 08DC98529261104F]
+2024-07-01T09:00:59.416Z [[31merror[39m]: Signup error: Invalid login: 535 5.7.139 Authentication unsuccessful, the user credentials were incorrect. [DX0P273CA0003.AREP273.PROD.OUTLOOK.COM 2024-07-01T09:00:58.834Z 08DC98529261104F]
+2024-07-01T09:01:44.810Z [[31merror[39m]: Signup error: Username or email already exists
+2024-07-01T09:12:01.873Z [[31merror[39m]: Signup error: Username or email already exists
+2024-07-01T09:29:46.498Z [[31merror[39m]: Signup error: Username or email already exists
