@@ -5,6 +5,7 @@ import { NotFoundError, ValidationError, CartOperationError } from '../utils/err
 import stripePaymentGateway from '../utils/stripe/stripeGateway.js';
 import paypalPaymentGateway from '../utils/paypal/paypalGateway.js';
 import logger from '../utils/logger.js';
+import sendEmail from '../utils/sendEmail.js';
 
 export const verifyCartContents = async (userId) => {
   try {
@@ -132,9 +133,12 @@ export const clearCart = async (userId) => {
 
 export const sendConfirmation = async (order) => {
   try {
-    // Placeholder for actual implementation
-    console.log('Order confirmation sent to user:', order.user);
-    logger.info(`Order confirmation sent for order: Order ID ${order._id}`);
+    const userEmail = order.user.email;
+    const subject = 'Order Confirmation';
+    const text = `Dear ${order.user.fullName},\n\nThank you for your order. Your order ID is ${order._id}.\n\nBest regards,\nYour Company`;
+
+    await sendEmail(userEmail, subject, text);
+    logger.info(`Order confirmation email sent for order: Order ID ${order._id}`);
   } catch (error) {
     logger.error(`Failed to send order confirmation for order: Order ID ${order._id}: ${error.message}`);
     // Log the error but don't throw, as it's not critical to the checkout flow
