@@ -167,3 +167,11 @@
 2024-07-01T09:50:49.379Z [[32minfo[39m]: Password reset successfully for user: imhassaan.dev@outlook.com
 2024-07-01T09:51:09.721Z [[31merror[39m]: Signin error: Invalid credentials
 2024-07-01T09:51:15.054Z [[32minfo[39m]: User signed in successfully: hassaanistic.outlook
+2024-07-02T04:04:19.389Z [[32minfo[39m]: User signed in successfully: hassaanistic.outlook
+2024-07-02T04:05:01.352Z [[31merror[39m]: Bulk import error: Expected property name or '}' in JSON at position 2
+2024-07-02T04:08:30.745Z [[32minfo[39m]: Product created: Product 2
+2024-07-02T04:08:30.750Z [[32minfo[39m]: Product created: Product 1
+2024-07-02T04:08:30.751Z [[32minfo[39m]: Product created: Product 3
+2024-07-02T04:08:30.752Z [[32minfo[39m]: Bulk products imported successfully
+2024-07-02T04:09:16.364Z [[32minfo[39m]: Fetched all products
+2024-07-02T04:09:16.365Z [[32minfo[39m]: All products fetched successfully

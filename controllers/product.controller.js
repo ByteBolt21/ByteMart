@@ -9,7 +9,7 @@ import {
 } from '../services/product.service.js';
 import Product from '../models/product.model.js';
 import { Parser } from 'json2csv';
-
+import { parseCsv } from '../utils/csvParser.js';
 import { ValidationError, ProductCreationError } from '../utils/errors.js';
 import logger from '../utils/logger.js';
 
@@ -214,5 +214,47 @@ export const exportProductsCsv = async (req, res) => {
   } catch (error) {
     logger.error(`Error exporting products: ${error.message}`);
     res.status(500).json({ error: error.message });
+  }
+};
+
+
+
+
+
+export const bulkImportProducts = async (req, res, next) => {
+  if (!req.file) {
+    return res.status(400).json({ error: 'No CSV file uploaded' });
+  }
+
+  try {
+    const csvData = await parseCsv(req.file.buffer);
+    
+    const products = await Promise.all(csvData.map(async (row) => {
+      const { name, category, description, subcategory, brand, images, variations } = row;
+      const parsedImages = images.split('|'); // Assuming images are separated by '|'
+      const parsedVariations = JSON.parse(variations); // Assuming variations are provided as JSON string
+
+      return createProductService({
+        name,
+        category,
+        description,
+        subcategory,
+        brand,
+        images: parsedImages,
+        variations: parsedVariations,
+      }, req.user.id);
+    }));
+
+    logger.info('Bulk products imported successfully');
+    res.status(201).json({ message: 'Bulk products imported successfully', products });
+  } catch (error) {
+    logger.error(`Bulk import error: ${error.message}`);
+    if (error instanceof ValidationError) {
+      res.status(400).json({ error: error.message });
+    } else if (error instanceof ProductCreationError) {
+      res.status(500).json({ error: error.message });
+    } else {
+      res.status(500).json({ error: 'Failed to import products' });
+    }
   }
 };

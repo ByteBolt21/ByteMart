@@ -30,3 +30,4 @@
 2024-07-01T09:12:01.873Z [[31merror[39m]: Signup error: Username or email already exists
 2024-07-01T09:29:46.498Z [[31merror[39m]: Signup error: Username or email already exists
 2024-07-01T09:51:09.721Z [[31merror[39m]: Signin error: Invalid credentials
+2024-07-02T04:05:01.352Z [[31merror[39m]: Bulk import error: Expected property name or '}' in JSON at position 2
