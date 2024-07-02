@@ -9,6 +9,7 @@ import orderRoutes from './routes/order.routes.js';
 import errorHandlerMiddleware from './middlewares/error-handler.middleware.js';
 import cartRoutes from './routes/cart.routes.js';
 import checkoutRoutes from './routes/checkout.routes.js';
+import exportRoutes from './routes/export.routes.js';
 
 dotenv.config();
 
@@ -36,7 +37,7 @@ app.use('/cart', cartRoutes);
 // Checkout routes
 app.use('/api/checkout', checkoutRoutes);
 
-
+app.use('/api/export', exportRoutes);
 //  It's typically defined as the last middleware in the middleware chain so that it catches any errors thrown or passed to next() from previous middleware or route handlers.
 // Error handling middleware
 app.use(errorHandlerMiddleware);
