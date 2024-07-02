@@ -7,6 +7,8 @@ import logger from '../utils/logger.js';
 import { Parser } from 'json2csv';
 import crypto from 'crypto';
 import sendEmail from '../utils/nodemailer.js';
+import { parseCsv } from '../utils/csvParser.js'; // Assuming you have defined the parseCsv function
+
 
 export const signup = async (req, res, next) => {
   const { fullName, username, email, role, number, password } = req.body;
@@ -244,6 +246,61 @@ export const resetPassword = async (req, res, next) => {
     res.status(200).json({ message: 'Password reset successfully' });
   } catch (error) {
     logger.error(`Password reset error: ${error.message}`);
+    next(error);
+  }
+};
+
+
+export const bulkImportUsers = async (req, res, next) => {
+  const { file } = req; // File is available from multer middleware
+  if (!file) {
+    return next(new ValidationError('No CSV file provided'));
+  }
+
+  try {
+    // Parse CSV file data
+    const csvData = await parseCsv(file.buffer);
+
+    // Validate CSV data
+    if (!Array.isArray(csvData) || csvData.length === 0) {
+      throw new ValidationError('Invalid CSV file');
+    }
+
+    // Process each user entry from CSV and save to database
+    const savedUsers = [];
+    for (const userData of csvData) {
+      const { fullName, username, email, number, password, role } = userData;
+      
+      // Validate required fields
+      if (!fullName || !username || !email || !number || !password || !role) {
+        throw new ValidationError('Invalid user data in CSV');
+      }
+
+      // Check if user with same email or username already exists
+      const existingUser = await User.findOne({ $or: [{ username }, { email }] });
+      if (existingUser) {
+        // You can choose to skip or handle duplicate entries as per your requirement
+        console.warn(`User with username '${username}' or email '${email}' already exists. Skipping.`);
+        continue;
+      }
+
+      // Create new user instance
+      const newUser = new User({
+        fullName,
+        username,
+        email,
+        number,
+        password, // Ensure password hashing is done before saving in production
+        role
+      });
+
+      // Save user to database
+      const savedUser = await newUser.save();
+      savedUsers.push(savedUser);
+    }
+
+    res.status(200).json({ message: 'Users imported successfully', savedUsers });
+  } catch (error) {
     next(error);
   }
 };
