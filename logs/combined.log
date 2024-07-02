@@ -182,3 +182,57 @@
 2024-07-02T05:00:59.990Z [[32minfo[39m]: CSV file sent successfully
 2024-07-02T05:38:18.239Z [[32minfo[39m]: User signed in successfully: hassaanistic.outlook
 2024-07-02T05:57:14.522Z [[32minfo[39m]: All users fetched successfully
+2024-07-02T06:06:00.447Z [[31merror[39m]: Add to cart service error: Variation not found for product with color Green and size Large
+2024-07-02T06:06:00.450Z [[31merror[39m]: Failed to add item to cart: Variation not found for product with color Green and size Large
+2024-07-02T06:06:06.689Z [[32minfo[39m]: Added product to cart: 667b9f8afd3931fce4646082, Quantity: 2, User: 668277209ad2769022eaba47
+2024-07-02T06:06:06.690Z [[32minfo[39m]: Item added to cart: Product ID 667b9f8afd3931fce4646082, Quantity 2, User ID 668277209ad2769022eaba47
+2024-07-02T06:08:09.830Z [[32minfo[39m]: Checkout initiated for user ID 668277209ad2769022eaba47
+2024-07-02T06:08:10.067Z [[32minfo[39m]: Order created successfully for user ID 668277209ad2769022eaba47: Order ID 66839949449ddfaa43c9643a
+2024-07-02T06:08:10.068Z [[32minfo[39m]: Order created successfully for user ID 668277209ad2769022eaba47: Order ID 66839949449ddfaa43c9643a
+2024-07-02T06:08:12.322Z [[32minfo[39m]: Payment processed successfully for Stripe: Order ID 66839949449ddfaa43c9643a
+2024-07-02T06:08:16.641Z [[31merror[39m]: Error sending email: No recipients defined
+2024-07-02T06:08:16.642Z [[31merror[39m]: Failed to send order confirmation for order: Order ID 66839949449ddfaa43c9643a: No recipients defined
+2024-07-02T06:08:16.642Z [[32minfo[39m]: Checkout successful for user ID 668277209ad2769022eaba47: Order ID 66839949449ddfaa43c9643a
+2024-07-02T06:11:45.527Z [[32minfo[39m]: Added product to cart: 667b9f8afd3931fce4646082, Quantity: 2, User: 668277209ad2769022eaba47
+2024-07-02T06:11:45.532Z [[32minfo[39m]: Item added to cart: Product ID 667b9f8afd3931fce4646082, Quantity 2, User ID 668277209ad2769022eaba47
+2024-07-02T06:11:50.263Z [[32minfo[39m]: Checkout initiated for user ID 668277209ad2769022eaba47
+2024-07-02T06:11:50.544Z [[32minfo[39m]: Order created successfully for user ID 668277209ad2769022eaba47: Order ID 66839a2624e6518b097eb3bc
+2024-07-02T06:11:50.546Z [[32minfo[39m]: Order created successfully for user ID 668277209ad2769022eaba47: Order ID 66839a2624e6518b097eb3bc
+2024-07-02T06:11:51.773Z [[32minfo[39m]: Payment processed successfully for Stripe: Order ID 66839a2624e6518b097eb3bc
+2024-07-02T06:11:54.876Z [[31merror[39m]: Error sending email: No recipients defined
+2024-07-02T06:11:54.876Z [[31merror[39m]: Failed to send order confirmation for order: Order ID 66839a2624e6518b097eb3bc: No recipients defined
+2024-07-02T06:11:54.877Z [[32minfo[39m]: Checkout successful for user ID 668277209ad2769022eaba47: Order ID 66839a2624e6518b097eb3bc
+2024-07-02T06:12:44.510Z [[32minfo[39m]: Added product to cart: 667b9f8afd3931fce4646082, Quantity: 2, User: 668277209ad2769022eaba47
+2024-07-02T06:12:44.514Z [[32minfo[39m]: Item added to cart: Product ID 667b9f8afd3931fce4646082, Quantity 2, User ID 668277209ad2769022eaba47
+2024-07-02T06:12:48.988Z [[32minfo[39m]: Checkout initiated for user ID 668277209ad2769022eaba47
+2024-07-02T06:12:51.269Z [[32minfo[39m]: Order created successfully for user ID 668277209ad2769022eaba47: Order ID 66839a626b2ddfc5163095d1
+2024-07-02T06:12:51.271Z [[32minfo[39m]: Order created successfully for user ID 668277209ad2769022eaba47: Order ID 66839a626b2ddfc5163095d1
+2024-07-02T06:12:53.118Z [[32minfo[39m]: Payment processed successfully for Stripe: Order ID 66839a626b2ddfc5163095d1
+2024-07-02T06:12:57.807Z [[31merror[39m]: Error sending email: No recipients defined
+2024-07-02T06:12:57.808Z [[31merror[39m]: Failed to send order confirmation for order: Order ID 66839a626b2ddfc5163095d1: No recipients defined
+2024-07-02T06:12:57.809Z [[32minfo[39m]: Checkout successful for user ID 668277209ad2769022eaba47: Order ID 66839a626b2ddfc5163095d1
+2024-07-02T06:21:52.788Z [[32minfo[39m]: Added product to cart: 667b9f8afd3931fce4646082, Quantity: 2, User: 668277209ad2769022eaba47
+2024-07-02T06:21:52.794Z [[32minfo[39m]: Item added to cart: Product ID 667b9f8afd3931fce4646082, Quantity 2, User ID 668277209ad2769022eaba47
+2024-07-02T06:22:09.913Z [[32minfo[39m]: Checkout initiated for user ID 668277209ad2769022eaba47
+2024-07-02T06:22:10.478Z [[32minfo[39m]: Order created successfully for user ID 668277209ad2769022eaba47: Order ID 66839c92fcf1127184cf74cd
+2024-07-02T06:22:10.480Z [[32minfo[39m]: Order created successfully for user ID 668277209ad2769022eaba47: Order ID 66839c92fcf1127184cf74cd
+2024-07-02T06:22:12.016Z [[32minfo[39m]: Payment processed successfully for Stripe: Order ID 66839c92fcf1127184cf74cd
+2024-07-02T06:22:16.015Z [[31merror[39m]: Error sending email: No recipients defined
+2024-07-02T06:22:16.016Z [[31merror[39m]: Failed to send order confirmation for order: Order ID 66839c92fcf1127184cf74cd: No recipients defined
+2024-07-02T06:22:16.016Z [[32minfo[39m]: Checkout successful for user ID 668277209ad2769022eaba47: Order ID 66839c92fcf1127184cf74cd
+2024-07-02T06:24:33.223Z [[32minfo[39m]: Added product to cart: 667b9f8afd3931fce4646082, Quantity: 2, User: 668277209ad2769022eaba47
+2024-07-02T06:24:33.225Z [[32minfo[39m]: Item added to cart: Product ID 667b9f8afd3931fce4646082, Quantity 2, User ID 668277209ad2769022eaba47
+2024-07-02T06:24:38.796Z [[32minfo[39m]: Checkout initiated for user ID 668277209ad2769022eaba47
+2024-07-02T06:24:39.165Z [[32minfo[39m]: Order created successfully for user ID 668277209ad2769022eaba47: Order ID 66839d278d636e4f1d4da54b
+2024-07-02T06:24:39.167Z [[32minfo[39m]: Order created successfully for user ID 668277209ad2769022eaba47: Order ID 66839d278d636e4f1d4da54b
+2024-07-02T06:24:47.293Z [[32minfo[39m]: Payment processed successfully for Stripe: Order ID 66839d278d636e4f1d4da54b
+2024-07-02T06:24:50.434Z [[31merror[39m]: Error sending email: No recipients defined
+2024-07-02T06:24:50.435Z [[31merror[39m]: Failed to send order confirmation for order: Order ID 66839d278d636e4f1d4da54b: No recipients defined
+2024-07-02T06:24:50.436Z [[32minfo[39m]: Checkout successful for user ID 668277209ad2769022eaba47: Order ID 66839d278d636e4f1d4da54b
+2024-07-02T06:25:02.010Z [[32minfo[39m]: Added product to cart: 667b9f8afd3931fce4646082, Quantity: 2, User: 668277209ad2769022eaba47
+2024-07-02T06:25:02.011Z [[32minfo[39m]: Item added to cart: Product ID 667b9f8afd3931fce4646082, Quantity 2, User ID 668277209ad2769022eaba47
+2024-07-02T06:25:37.549Z [[32minfo[39m]: Checkout initiated for user ID 668277209ad2769022eaba47
+2024-07-02T06:25:37.780Z [[32minfo[39m]: Order created successfully for user ID 668277209ad2769022eaba47: Order ID 66839d618d636e4f1d4da561
+2024-07-02T06:25:37.781Z [[32minfo[39m]: Order created successfully for user ID 668277209ad2769022eaba47: Order ID 66839d618d636e4f1d4da561
+2024-07-02T06:25:40.505Z [[32minfo[39m]: Payment processed successfully for PayPal: Order ID 66839d618d636e4f1d4da561
+2024-07-02T06:25:40.507Z [[32minfo[39m]: PayPal payment initiated for user ID 668277209ad2769022eaba47: Order ID 66839d618d636e4f1d4da561

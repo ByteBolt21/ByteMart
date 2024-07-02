@@ -85,7 +85,7 @@ export const processPaymentThroughPayPal = async (order, paymentDetails) => {
       throw new CartOperationError('Payment failed');
     }
   
-    // Attach payment details to the order if needed
+    // Attach payment details to the order if needed 
     order.payment = {
       method: 'PayPal',
       transactionId: paymentResult.id

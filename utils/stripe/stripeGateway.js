@@ -19,6 +19,7 @@ const processPaymentThroughStripe = async (amount, paymentDetails) => {
       description: 'Payment for Order',
       receipt_email: paymentDetails.email, // Customer's email for receipt
     });
+    //we can update this from client secrete id to direct object and then we have to jsut update the order model
 
     return { clientSecret: paymentIntent.client_secret };
   } catch (error) {

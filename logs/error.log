@@ -31,3 +31,15 @@
 2024-07-01T09:29:46.498Z [[31merror[39m]: Signup error: Username or email already exists
 2024-07-01T09:51:09.721Z [[31merror[39m]: Signin error: Invalid credentials
 2024-07-02T04:05:01.352Z [[31merror[39m]: Bulk import error: Expected property name or '}' in JSON at position 2
+2024-07-02T06:06:00.447Z [[31merror[39m]: Add to cart service error: Variation not found for product with color Green and size Large
+2024-07-02T06:06:00.450Z [[31merror[39m]: Failed to add item to cart: Variation not found for product with color Green and size Large
+2024-07-02T06:08:16.641Z [[31merror[39m]: Error sending email: No recipients defined
+2024-07-02T06:08:16.642Z [[31merror[39m]: Failed to send order confirmation for order: Order ID 66839949449ddfaa43c9643a: No recipients defined
+2024-07-02T06:11:54.876Z [[31merror[39m]: Error sending email: No recipients defined
+2024-07-02T06:11:54.876Z [[31merror[39m]: Failed to send order confirmation for order: Order ID 66839a2624e6518b097eb3bc: No recipients defined
+2024-07-02T06:12:57.807Z [[31merror[39m]: Error sending email: No recipients defined
+2024-07-02T06:12:57.808Z [[31merror[39m]: Failed to send order confirmation for order: Order ID 66839a626b2ddfc5163095d1: No recipients defined
+2024-07-02T06:22:16.015Z [[31merror[39m]: Error sending email: No recipients defined
+2024-07-02T06:22:16.016Z [[31merror[39m]: Failed to send order confirmation for order: Order ID 66839c92fcf1127184cf74cd: No recipients defined
+2024-07-02T06:24:50.434Z [[31merror[39m]: Error sending email: No recipients defined
+2024-07-02T06:24:50.435Z [[31merror[39m]: Failed to send order confirmation for order: Order ID 66839d278d636e4f1d4da54b: No recipients defined

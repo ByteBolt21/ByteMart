@@ -21,6 +21,10 @@ const OrderSchema = new Schema({
   status: { type: String, enum: ['Pending', 'Shipped', 'Delivered', 'Cancelled'], default: 'Pending' },
   trackingId: { type: String },
   createdAt: { type: Date, default: Date.now },
+  payment: { 
+    method: { type: String }, // Adjust type as per your needs, e.g., 'Stripe' or 'PayPal'
+    transactionId: { type: String } // Store transaction ID here
+  }
 }, {
   timestamps: true,
   collection: 'orders'

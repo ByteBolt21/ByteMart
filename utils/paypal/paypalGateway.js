@@ -55,6 +55,7 @@ export const createPayPalOrder = async (amount, paymentDetails) => {
   });
 
   if (response.data.links) {
+    //we can update this from id to direct object and then we have to jsut update the order model
     return { id: response.data.id, approveLink: response.data.links.find(link => link.rel === 'approve').href };
   } else {
     throw new Error('Error creating PayPal order');
